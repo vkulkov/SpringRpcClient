@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--    JAX-WS  -->
+
+    <bean id="jwsCalculationService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="wsdlDocumentUrl" value="http://localhost:8888/services/CalculationService?wsdl"/>
+        <property name="serviceName" value="CalculationService"/>
+        <property name="portName" value="CalculationServiceImplPort"/>
+        <property name="serviceInterface" value="com.simple.service.CalculationService"/>
+        <property name="namespaceUri" value="http://service.simple.com/"/>
+    </bean>
+
+    <!--    RMI     -->
+
+    <bean id="rmiCalculationService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost/CalculationService"/>
+        <property name="serviceInterface" value="com.simple.service.CalculationService"/>
+    </bean>
+
+    <!--    HESSIAN     -->
+
+    <bean id="hessianCalculationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="http://localhost:8080/spring/hcalculation.service"/>
+        <property name="serviceInterface" value="com.simple.service.CalculationService"/>
+    </bean>
+
+    <!--    SPRING HTTP INVOKER     -->
+
+    <bean id="httpInvokerCalculationService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://localhost:8080/spring/icalculation.service"/>
+        <property name="serviceInterface" value="com.simple.service.CalculationService"/>
+    </bean>
+
+</beans>
